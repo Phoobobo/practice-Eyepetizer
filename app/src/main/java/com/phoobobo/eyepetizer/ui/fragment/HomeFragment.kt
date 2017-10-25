@@ -2,6 +2,8 @@ package com.phoobobo.eyepetizer.ui.fragment
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,9 +22,13 @@ import kotlinx.android.synthetic.main.fragment_home.*
  */
 class HomeFragment : BaseFragment(tabId = tabsId[0]), HomeContract.IView {
 
+    private val TAG = "HomeFragment"
+
     private var presenter: HomePresenter = HomePresenter(this)
 
     private val mHomeAdapter: HomeAdapter by lazy { HomeAdapter() }
+
+    var loadingMore = false
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_home, null)
@@ -37,6 +43,24 @@ class HomeFragment : BaseFragment(tabId = tabsId[0]), HomeContract.IView {
     private fun initView() {
         rv_home.adapter = mHomeAdapter
         rv_home.layoutManager = LinearLayoutManager(activity)
+
+        rv_home.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    val lastVisibleItemPosition = (rv_home.layoutManager as LinearLayoutManager)
+                            .findLastVisibleItemPosition()
+                    val itemCount = rv_home.layoutManager.itemCount
+                    if (lastVisibleItemPosition == itemCount - 1) {
+                        Log.d(TAG, "到底了")
+                        if (!loadingMore) {
+                            loadingMore = true
+                            onLoadMore()
+                        }
+                    }
+                }
+            }
+        })
     }
 
     override fun setFirstData(homeBean: HomeBean) {
@@ -45,7 +69,12 @@ class HomeFragment : BaseFragment(tabId = tabsId[0]), HomeContract.IView {
     }
 
     override fun setMoreData(itemList: ArrayList<Item>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        loadingMore = false
+        mHomeAdapter.addData(itemList)
+    }
+
+    fun onLoadMore() {
+        presenter.requestMoreData()
     }
 
     override fun onError() {

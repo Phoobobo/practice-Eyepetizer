@@ -24,6 +24,11 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     private val TYPE_STANDARD = 2
     private val TYPE_HEADER_TEXT = 3
 
+    fun addData(itemList: ArrayList<Item>) {
+        this.itemList.addAll(itemList)
+        notifyDataSetChanged()
+    }
+
     /**
      * 根据position定义view类型
      */

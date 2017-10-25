@@ -46,6 +46,13 @@ class HomePresenter(homeView: HomeContract.IView) : HomeContract.IPresenter {
     }
 
     override fun requestMoreData() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mNextPageUrl?.let {
+            homeModel.loadMoreData(it).subscribe({homeBean: HomeBean ->
+                val newItemList = homeBean.issueList[0].itemList
+                newItemList.filter { item -> item.type == "banner2" }.forEach { item -> newItemList.remove(item)  }
+                mHomeView.setMoreData(newItemList)
+                mNextPageUrl = homeBean.nextPageUrl
+            })
+        }
     }
 }
