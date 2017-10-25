@@ -10,6 +10,6 @@ data class Issue (
         val total: Int,
         val publishTime: Long,
         val itemList: ArrayList<Item>,
-        val count: Int,
+        var count: Int,
         val nextPageUrl: String
 )
