@@ -4,9 +4,21 @@ package com.phoobobo.eyepetizer.mvp.model.bean
  * Created by phoobobo on 2017/10/20.
  */
 data class HomeBean (
-        var issueList: ArrayList<Issue>,
+        var topIssue: TopIssue, // banner
+        var itemList: ArrayList<ListItem>, // list
+        var count: Int,
+        var total: Int,
+        var date: Long,
         val nextPageUrl: String,
         val nextPublishTime: Long,
-        val newestIssueType: String,
-        val dialog: Any
-)
+        val dialog: Any,
+        val refreshCount: Int,
+        val lastStartId: Int
+) {
+    companion object {
+        val videoCollectionWithCover = "videoCollectionWithCover"
+        val banner = "banner"
+        val squareCardCollection = "squareCardCollection"
+        val horizontalScrollCard = "horizontalScrollCard"
+    }
+}

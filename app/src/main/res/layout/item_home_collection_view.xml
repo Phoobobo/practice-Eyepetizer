@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/iv_cover"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/home_page_header_cover"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_item_list"
+        android:layout_width="wrap_content"
+        android:layout_height="280dp"/>
+</LinearLayout>

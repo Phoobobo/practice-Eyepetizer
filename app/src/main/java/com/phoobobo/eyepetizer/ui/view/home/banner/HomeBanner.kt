@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import com.phoobobo.eyepetizer.mvp.model.bean.Item
+import com.phoobobo.eyepetizer.mvp.model.bean.TopIssue
 import com.phoobobo.eyepetizer.utils.DisplayManager
 
 /**
@@ -25,10 +26,9 @@ class HomeBanner : FrameLayout {
         initListeners()
     }
 
-    internal fun setData(itemList: ArrayList<Item>) {
-        itemList.filter { item -> item.type == "banner2" }.forEach { item -> itemList.remove(item) }
-        bannerAdapter.data = itemList
-        setIndicators(itemList)
+    internal fun setData(topIssue: Any) {
+        bannerAdapter.data = (topIssue as TopIssue).data.itemList
+//        setIndicators(itemList)
         setTitleSlogan(0)
     }
 

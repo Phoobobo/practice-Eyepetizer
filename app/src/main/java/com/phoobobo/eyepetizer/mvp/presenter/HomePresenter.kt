@@ -1,6 +1,7 @@
 package com.phoobobo.eyepetizer.mvp.presenter
 
 import android.util.Log
+import com.phoobobo.eyepetizer.Storage
 import com.phoobobo.eyepetizer.mvp.contract.HomeContract
 import com.phoobobo.eyepetizer.mvp.model.HomeModel
 import com.phoobobo.eyepetizer.mvp.model.bean.HomeBean
@@ -18,27 +19,19 @@ class HomePresenter(homeView: HomeContract.IView) : HomeContract.IPresenter {
         HomeModel()
     }
 
+    private var wholeList: ArrayList<Any>? = ArrayList()
+
+
     private var mHomeBean: HomeBean? = null
     private var mNextPageUrl: String? = null
 
     override fun requestFirstData() {
-        homeModel.loadFirstData()
-                .flatMap { homeBean ->
-//                    Log.d(TAG, "raw data: $homeBean")
-                    mHomeBean = homeBean
-                    homeModel.loadMoreData(homeBean.nextPageUrl)
-                }
+        homeModel.loadFirstData(Storage.lastStartId)
                 .subscribe({ homeBean ->
-                    mNextPageUrl = homeBean.nextPageUrl
-                    mHomeBean!!.issueList[0].count = mHomeBean!!.issueList[0].itemList.size
+                    wholeList?.add(homeBean.topIssue)
+                    wholeList?.addAll(homeBean.itemList)
 
-                    // 过滤掉banner2item
-                    val newItemList = homeBean.issueList[0].itemList
-                    newItemList.filter { item -> item.type == "banner2" }
-                            .forEach { item -> newItemList.remove(item) }
-
-                    mHomeBean?.issueList!![0].itemList.addAll(newItemList)
-                    mHomeView.setFirstData(mHomeBean!!)
+                    mHomeView.setFirstData(wholeList!!)
                 }, { t ->
                     t.printStackTrace()
                     mHomeView.onError()
@@ -48,10 +41,10 @@ class HomePresenter(homeView: HomeContract.IView) : HomeContract.IPresenter {
     override fun requestMoreData() {
         mNextPageUrl?.let {
             homeModel.loadMoreData(it).subscribe({homeBean: HomeBean ->
-                val newItemList = homeBean.issueList[0].itemList
-                newItemList.filter { item -> item.type == "banner2" }.forEach { item -> newItemList.remove(item)  }
-                mHomeView.setMoreData(newItemList)
-                mNextPageUrl = homeBean.nextPageUrl
+//                val newItemList = homeBean.issueList[0].itemList
+//                newItemList.filter { item -> item.type == "banner2" }.forEach { item -> newItemList.remove(item)  }
+//                mHomeView.setMoreData(newItemList)
+//                mNextPageUrl = homeBean.nextPageUrl
             })
         }
     }

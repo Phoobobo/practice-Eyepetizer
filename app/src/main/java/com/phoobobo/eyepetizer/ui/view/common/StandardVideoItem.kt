@@ -11,6 +11,7 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget
 import com.phoobobo.eyepetizer.R
 import com.phoobobo.eyepetizer.durationFormat
 import com.phoobobo.eyepetizer.mvp.model.bean.Item
+import com.phoobobo.eyepetizer.mvp.model.bean.ListItem
 import com.phoobobo.eyepetizer.timePreFormat
 import kotlinx.android.synthetic.main.item_home_standard.view.*
 
@@ -29,21 +30,17 @@ class StandardVideoItem : FrameLayout {
     }
 
     /**
-     * type表示该item用于哪里，稍有不同
+     * 设置item封面 作者头像 标题 描述
      */
-    fun setData(item: Item, type: String) {
-        val data = item.data
+    fun setData(item: Any) {
+        val itemData = (item as ListItem).data
+        val header = itemData.header
+        val content = itemData.content
+        val data = content.data
 
-        if (data?.cover?.homepage == null) {
-
-        }
         val cover = data?.cover?.feed
-        var avatar = data?.author?.icon
+        var avatar = header?.icon
         var avatarRes = R.mipmap.pgc_default_avatar
-
-        if (avatar == null || "" == avatar) {
-            avatar = data?.provider?.icon
-        }
 
         Glide.with(context).load(cover).centerCrop().into(iv_cover)
 
@@ -60,31 +57,8 @@ class StandardVideoItem : FrameLayout {
         } else {
             Glide.with(context).load(avatar).asBitmap().centerCrop().into(ivAvatarCircle)
         }
-        tv_title.text = item.data?.title
-        var tagText = ""
-        if (type.equals("feed")) {
-            tagText = ""
-        } else if (type.equals("categorydetail")) {
-            if(data?.author!=null){
-                tagText = data.author.name + " / "
-            }else if(data?.provider!=null){
-                tagText = data.provider.name + " / "
-            }else{
-                tagText = ""
-            }
-        }
-        data?.tags?.take(4)?.forEach { tagText += (it.name + " / ") }
-        val timeFormat = durationFormat(data?.duration)
-        tagText += timeFormat
-        tv_tag.text = tagText
-
-        if (type.equals("feed")) {
-            tv_tag2.text = data?.category
-        } else if (type.equals("categorydetail")) {
-            data?.date?.let {
-                tv_tag2.text = timePreFormat(it)
-            }
-        }
+        tv_title.text = header?.title
+        tv_description.text = header?.description
 
     }
 }

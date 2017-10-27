@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iv_cover"
+        android:layout_width="260dp"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/home_page_header_cover" />
+    <TextView
+        android:id="@+id/tv_categary_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"/>
+</FrameLayout>

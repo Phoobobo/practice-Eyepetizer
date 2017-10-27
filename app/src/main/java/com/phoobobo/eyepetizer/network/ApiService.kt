@@ -12,9 +12,10 @@ import retrofit2.http.Url
 interface ApiService {
     /**
      * banner+一页数据，num=1
+     * TODO: 动态设定和获取device以及版本信息
      */
-    @GET("v2/feed?&num=1")
-    fun getFirstHomeData(@Query("date") date: Long): Observable<HomeBean>
+    @GET("v4/tabs/selected?vc=225&vn=3.12.0&deviceModel=Redmi 4")
+    fun getFirstHomeData(@Query("lastStartId") lastStartId: Int = -1): Observable<HomeBean>
 
     /**
      * 根据nextpageurl请求数据

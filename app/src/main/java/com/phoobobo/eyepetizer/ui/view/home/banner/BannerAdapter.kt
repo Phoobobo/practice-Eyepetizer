@@ -16,7 +16,7 @@ class BannerAdapter : PagerAdapter() {
             notifyDataSetChanged()
         }
 
-    var viewList: ArrayList<HomeBannerItem> = ArrayList()
+    private var viewList: ArrayList<HomeBannerItem> = ArrayList()
 
     override fun isViewFromObject(view: View?, `object`: Any?): Boolean {
         return view == `object`

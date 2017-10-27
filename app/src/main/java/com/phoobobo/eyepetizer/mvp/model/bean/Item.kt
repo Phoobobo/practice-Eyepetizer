@@ -47,7 +47,8 @@ data class Item(val type: String, val data: Data?, val tag: String) : Serializab
                     val played: Boolean,
                     val subtitles: Any,
                     val lastViewTime: Any,
-                    val playlists: Any
+                    val playlists: Any,
+                    val image: String?
     ) : Serializable {
         data class Tag(val id: Int, val name: String, val actionUrl: String, val adTrack: Any) : Serializable
         data class Author(val icon: String, val name: String, val description: String) : Serializable

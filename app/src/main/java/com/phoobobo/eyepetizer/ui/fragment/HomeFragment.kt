@@ -11,6 +11,7 @@ import com.phoobobo.eyepetizer.R
 import com.phoobobo.eyepetizer.mvp.contract.HomeContract
 import com.phoobobo.eyepetizer.mvp.model.bean.HomeBean
 import com.phoobobo.eyepetizer.mvp.model.bean.Item
+import com.phoobobo.eyepetizer.mvp.model.bean.TopIssue
 import com.phoobobo.eyepetizer.mvp.presenter.HomePresenter
 import com.phoobobo.eyepetizer.ui.adapter.HomeAdapter
 import com.phoobobo.eyepetizer.ui.base.BaseFragment
@@ -63,9 +64,9 @@ class HomeFragment : BaseFragment(tabId = tabsId[0]), HomeContract.IView {
         })
     }
 
-    override fun setFirstData(homeBean: HomeBean) {
-        mHomeAdapter.bannerItemListCount = homeBean.issueList[0].count
-        mHomeAdapter.itemList = homeBean.issueList[0].itemList
+    override fun setFirstData(itemList: ArrayList<Any>) {
+        mHomeAdapter.bannerItemListCount = (itemList[0] as TopIssue).data.count
+        mHomeAdapter.itemList = itemList
     }
 
     override fun setMoreData(itemList: ArrayList<Item>) {
