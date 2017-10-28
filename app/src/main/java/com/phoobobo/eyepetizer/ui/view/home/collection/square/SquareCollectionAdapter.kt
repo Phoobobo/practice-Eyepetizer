@@ -11,13 +11,17 @@ import com.phoobobo.eyepetizer.mvp.model.bean.Item
 class SquareCollectionAdapter : RecyclerView.Adapter<SquareCollectionAdapter.ViewHolder>() {
 
     var itemList: ArrayList<Item> = ArrayList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         (holder?.itemView as SquareCollectionItem).setData(itemList[position])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        return ViewHolder(CollectionItem(parent?.context!!))
+        return ViewHolder(SquareCollectionItem(parent?.context!!))
     }
 
     override fun getItemCount(): Int {

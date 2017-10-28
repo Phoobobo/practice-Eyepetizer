@@ -76,9 +76,9 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         return when (viewType) {
             TYPE_TOP_ISSUE -> ViewHolder(HomeBanner(parent!!.context))
-            TYPE_BANNER -> ViewHolder(InListBannerView(parent!!.context)) // TODO: InListBanner
+            TYPE_BANNER -> ViewHolder(InListBannerView(parent!!.context))
             TYPE_STANDARD -> ViewHolder(StandardVideoItem(parent!!.context))
-            TYPE_VIDEO_COLLECTION -> ViewHolder(CollectionView(parent!!.context)) // TODO: 横向RecyclerView
+            TYPE_VIDEO_COLLECTION -> ViewHolder(CollectionView(parent!!.context))
             TYPE_SQUARE_COLLECTION -> ViewHolder(SquareCollectionView(parent!!.context))
             TYPE_HORIZONTAL_SCROLL_CARD -> ViewHolder(HorizontalScrollCardView(parent!!.context))
             else -> ViewHolder(null)

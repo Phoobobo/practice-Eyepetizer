@@ -1,6 +1,7 @@
 package com.phoobobo.eyepetizer.ui.view.home.collection.video
 
 import android.content.Context
+import android.support.v7.widget.LinearLayoutManager
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.item_home_collection_view.view.*
  */
 class CollectionView : FrameLayout {
 
-    private val collectionAdapter = SquareCollectionAdapter()
+    private val collectionAdapter = CollectionAdapter()
 
     constructor(context: Context) : this(context, null)
 
@@ -25,6 +26,10 @@ class CollectionView : FrameLayout {
     private fun initView() {
         View.inflate(context, R.layout.item_home_collection_view, this)
         rv_item_list.adapter = collectionAdapter
+
+        val linearLayoutManager = LinearLayoutManager(context)
+        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        rv_item_list.layoutManager = linearLayoutManager
     }
 
     internal fun setData(data: Any) {
