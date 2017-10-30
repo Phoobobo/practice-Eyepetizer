@@ -25,7 +25,7 @@ class InListBannerView : FrameLayout {
     }
 
     internal fun setData(item: Any) {
-        val data = (item as Item).data
+        val data = (item as ListItem).data
         val imageUrl = data?.image
 
         Glide.with(context).load(imageUrl).centerCrop().into(iv_cover)

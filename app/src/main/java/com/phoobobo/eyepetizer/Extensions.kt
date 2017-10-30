@@ -8,6 +8,7 @@ import java.util.*
 
 /**
  * Created by phoobobo on 2017/10/20.
+ * 对类的扩展
  */
 fun  <T> Observable<T>.io_main(): Observable<T> {
     return subscribeOn(Schedulers.io())

@@ -4,6 +4,7 @@ import com.phoobobo.eyepetizer.mvp.base.BasePresenter
 import com.phoobobo.eyepetizer.mvp.base.BaseView
 import com.phoobobo.eyepetizer.mvp.model.bean.HomeBean
 import com.phoobobo.eyepetizer.mvp.model.bean.Item
+import com.phoobobo.eyepetizer.mvp.model.bean.ListItem
 
 /**
  * Created by phoobobo on 2017/10/20.
@@ -24,7 +25,7 @@ interface HomeContract {
 
     interface IView: BaseView<IPresenter> {
         fun setFirstData(itemList: ArrayList<Any>)
-        fun setMoreData(itemList: ArrayList<Item>)
+        fun setMoreData(itemList: ArrayList<ListItem>)
         fun onError()
     }
 }

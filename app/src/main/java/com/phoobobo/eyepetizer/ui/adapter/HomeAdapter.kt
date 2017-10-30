@@ -9,6 +9,7 @@ import com.phoobobo.eyepetizer.mvp.model.bean.Item
 import com.phoobobo.eyepetizer.mvp.model.bean.ListItem
 import com.phoobobo.eyepetizer.ui.view.common.StandardVideoItem
 import com.phoobobo.eyepetizer.ui.view.home.InListBannerView
+import com.phoobobo.eyepetizer.ui.view.home.UnknownView
 import com.phoobobo.eyepetizer.ui.view.home.banner.HomeBanner
 import com.phoobobo.eyepetizer.ui.view.home.collection.video.CollectionView
 import com.phoobobo.eyepetizer.ui.view.home.collection.video.SquareCollectionView
@@ -26,6 +27,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         }
     var bannerItemListCount = 0
 
+    private val TYPE_UNKNOWN = 0
     private val TYPE_TOP_ISSUE = 1
     private val TYPE_STANDARD = 2
     private val TYPE_BANNER = 3 // 列表中的banner
@@ -33,7 +35,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     private val TYPE_SQUARE_COLLECTION = 5
     private val TYPE_HORIZONTAL_SCROLL_CARD = 6 // 列表内自动播放的banner
 
-    fun addData(itemList: ArrayList<Item>) {
+    fun addData(itemList: ArrayList<ListItem>) {
         this.itemList.addAll(itemList)
         notifyDataSetChanged()
     }
@@ -46,11 +48,12 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
             TYPE_TOP_ISSUE
         } else {
             when ((itemList[position] as ListItem).type) {
+                HomeBean.followCard -> TYPE_STANDARD
                 HomeBean.videoCollectionWithCover -> TYPE_VIDEO_COLLECTION
-                HomeBean.banner -> TYPE_BANNER
+                HomeBean.banner, HomeBean.banner3 -> TYPE_BANNER
                 HomeBean.squareCardCollection -> TYPE_SQUARE_COLLECTION
                 HomeBean.horizontalScrollCard -> TYPE_HORIZONTAL_SCROLL_CARD
-                else -> TYPE_STANDARD
+                else -> TYPE_UNKNOWN
             }
         }
     }
@@ -70,6 +73,8 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
                     .setData(itemList[position])
             TYPE_HORIZONTAL_SCROLL_CARD -> (holder?.itemView as HorizontalScrollCardView)
                     .setData(itemList[position])
+            TYPE_UNKNOWN -> (holder?.itemView as UnknownView)
+                    .text = "未知类型：${(itemList[position] as ListItem).type}"
         }
     }
 
@@ -81,7 +86,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
             TYPE_VIDEO_COLLECTION -> ViewHolder(CollectionView(parent!!.context))
             TYPE_SQUARE_COLLECTION -> ViewHolder(SquareCollectionView(parent!!.context))
             TYPE_HORIZONTAL_SCROLL_CARD -> ViewHolder(HorizontalScrollCardView(parent!!.context))
-            else -> ViewHolder(null)
+            else -> ViewHolder(UnknownView(parent!!.context))
         }
     }
 

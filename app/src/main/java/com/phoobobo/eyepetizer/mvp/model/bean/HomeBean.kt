@@ -16,8 +16,10 @@ data class HomeBean (
         val lastStartId: Int
 ) {
     companion object {
+        val followCard = "followCard"
         val videoCollectionWithCover = "videoCollectionWithCover"
         val banner = "banner"
+        val banner3 = "banner3"
         val squareCardCollection = "squareCardCollection"
         val horizontalScrollCard = "horizontalScrollCard"
     }

@@ -28,6 +28,9 @@ class HomePresenter(homeView: HomeContract.IView) : HomeContract.IPresenter {
     override fun requestFirstData() {
         homeModel.loadFirstData(Storage.lastStartId)
                 .subscribe({ homeBean ->
+                    mNextPageUrl = homeBean.nextPageUrl
+                    Storage.lastStartId = homeBean.lastStartId
+
                     wholeList?.add(homeBean.topIssue)
                     wholeList?.addAll(homeBean.itemList)
 
@@ -40,11 +43,10 @@ class HomePresenter(homeView: HomeContract.IView) : HomeContract.IPresenter {
 
     override fun requestMoreData() {
         mNextPageUrl?.let {
-            homeModel.loadMoreData(it).subscribe({homeBean: HomeBean ->
-//                val newItemList = homeBean.issueList[0].itemList
-//                newItemList.filter { item -> item.type == "banner2" }.forEach { item -> newItemList.remove(item)  }
-//                mHomeView.setMoreData(newItemList)
-//                mNextPageUrl = homeBean.nextPageUrl
+            homeModel.loadMoreData(it).subscribe({ homeBean: HomeBean ->
+
+                mHomeView.setMoreData(homeBean.itemList)
+                mNextPageUrl = homeBean.nextPageUrl
             })
         }
     }

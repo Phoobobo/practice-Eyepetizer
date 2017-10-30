@@ -15,7 +15,8 @@ class HomeModel {
         return Network.service.getFirstHomeData(lastStartId).io_main()
     }
 
+    // TODO: 优化
     fun loadMoreData(url: String): Observable<HomeBean> {
-        return Network.service.getMoreHomeData(url).io_main()
+        return Network.service.getMoreHomeData(url + "&vc=225&vn=3.12.0&deviceModel=Redmi 4").io_main()
     }
 }

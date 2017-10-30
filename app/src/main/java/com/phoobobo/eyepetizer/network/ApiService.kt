@@ -4,6 +4,7 @@ import com.phoobobo.eyepetizer.mvp.model.bean.HomeBean
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 import retrofit2.http.Url
 
 /**

@@ -11,6 +11,7 @@ import com.phoobobo.eyepetizer.R
 import com.phoobobo.eyepetizer.mvp.contract.HomeContract
 import com.phoobobo.eyepetizer.mvp.model.bean.HomeBean
 import com.phoobobo.eyepetizer.mvp.model.bean.Item
+import com.phoobobo.eyepetizer.mvp.model.bean.ListItem
 import com.phoobobo.eyepetizer.mvp.model.bean.TopIssue
 import com.phoobobo.eyepetizer.mvp.presenter.HomePresenter
 import com.phoobobo.eyepetizer.ui.adapter.HomeAdapter
@@ -69,7 +70,7 @@ class HomeFragment : BaseFragment(tabId = tabsId[0]), HomeContract.IView {
         mHomeAdapter.itemList = itemList
     }
 
-    override fun setMoreData(itemList: ArrayList<Item>) {
+    override fun setMoreData(itemList: ArrayList<ListItem>) {
         loadingMore = false
         mHomeAdapter.addData(itemList)
     }
