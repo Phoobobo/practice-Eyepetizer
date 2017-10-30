@@ -3,11 +3,16 @@ package com.phoobobo.eyepetizer.ui.view.home.banner
 import android.content.Context
 import android.support.v4.view.ViewPager
 import android.util.AttributeSet
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
+import com.phoobobo.eyepetizer.R
 import com.phoobobo.eyepetizer.mvp.model.bean.Item
 import com.phoobobo.eyepetizer.mvp.model.bean.TopIssue
 import com.phoobobo.eyepetizer.utils.DisplayManager
+import kotlinx.android.synthetic.main.top_banner_home.view.*
 
 /**
  * Created by phoobobo on 2017/10/24.
@@ -15,7 +20,6 @@ import com.phoobobo.eyepetizer.utils.DisplayManager
 class HomeBanner : FrameLayout {
 
     private val bannerAdapter: BannerAdapter by lazy { BannerAdapter() }
-    private val viewPager: ViewPager by lazy { ViewPager(context) }
     private val indicators: LinearLayout by lazy { LinearLayout(context) }
     // TODO: 悬浮文字和Slogan
 
@@ -45,10 +49,9 @@ class HomeBanner : FrameLayout {
     }
 
     private fun initView() {
-        viewPager.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, DisplayManager.getRealHeight(810)!!)
-        viewPager.adapter = bannerAdapter
-        viewPager.setPageTransformer(true, HomeBannerTransformer())
 
-        addView(viewPager)
+        View.inflate(context, R.layout.top_banner_home, this)
+        vp.adapter = bannerAdapter
+        vp.setPageTransformer(true, HomeBannerTransformer())
     }
 }

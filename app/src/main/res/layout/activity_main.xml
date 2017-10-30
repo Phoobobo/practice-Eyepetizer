@@ -6,7 +6,8 @@
     <FrameLayout
         android:id="@+id/fragment_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_above="@id/rg_root"/>
 
     <RelativeLayout
         android:id="@+id/toolbar"
@@ -30,6 +31,12 @@
             android:layout_marginRight="10dp"
             android:src="@mipmap/ic_action_search_white" />
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@id/rg_root"
+        android:background="@android:color/darker_gray"/>
 
     <RadioGroup
         android:id="@+id/rg_root"
