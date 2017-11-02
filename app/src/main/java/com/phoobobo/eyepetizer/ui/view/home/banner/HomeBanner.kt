@@ -130,5 +130,5 @@ class HomeBanner : FrameLayout {
         addView(floatInfo)
     }
 
-
+    internal fun getViewPager() : ViewPager = vp
 }

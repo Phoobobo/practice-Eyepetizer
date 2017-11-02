@@ -15,7 +15,7 @@ interface ApiService {
      * banner+一页数据，num=1
      * TODO: 动态设定和获取device以及版本信息
      */
-    @GET("v4/tabs/selected?vc=225&vn=3.12.0&deviceModel=Redmi 4")
+    @GET("v4/tabs/selected?vc=225&vn=3.12.0&deviceModel=Redmi 4&udid=20367d98dcef44429b7ad6de43343fdddbd4d895")
     fun getFirstHomeData(@Query("lastStartId") lastStartId: Int = -1): Observable<HomeBean>
 
     /**

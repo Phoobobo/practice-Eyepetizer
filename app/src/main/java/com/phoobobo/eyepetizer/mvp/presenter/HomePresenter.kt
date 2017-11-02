@@ -31,6 +31,7 @@ class HomePresenter(homeView: HomeContract.IView) : HomeContract.IPresenter {
                     mNextPageUrl = homeBean.nextPageUrl
                     Storage.lastStartId = homeBean.lastStartId
 
+                    wholeList?.clear() // 不清空，刷新的时候会无限累加到既有数组的尾部！
                     wholeList?.add(homeBean.topIssue)
                     wholeList?.addAll(homeBean.itemList)
 
