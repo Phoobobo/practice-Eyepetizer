@@ -15,7 +15,8 @@ class HorizontalScrollCardView(context: Context) : FrameLayout(context) {
     private val viewPager: ViewPager by lazy { ViewPager(context) }
 
     init {
-        viewPager.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, DisplayManager.getRealHeight(500)!!)
+        viewPager.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT,
+                DisplayManager.dip2px(228f)!!)
         viewPager.adapter = adapter
         addView(viewPager)
     }

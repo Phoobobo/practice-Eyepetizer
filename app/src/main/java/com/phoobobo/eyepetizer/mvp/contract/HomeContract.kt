@@ -26,6 +26,7 @@ interface HomeContract {
     interface IView: BaseView<IPresenter> {
         fun setFirstData(itemList: ArrayList<Any>)
         fun setMoreData(itemList: ArrayList<ListItem>)
+        fun notifyRefreshCount(count: Int)
         fun onError()
     }
 }

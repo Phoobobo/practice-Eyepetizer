@@ -21,8 +21,6 @@ class HomePresenter(homeView: HomeContract.IView) : HomeContract.IPresenter {
 
     private var wholeList: ArrayList<Any>? = ArrayList()
 
-
-    private var mHomeBean: HomeBean? = null
     private var mNextPageUrl: String? = null
 
     override fun requestFirstData() {
@@ -36,6 +34,8 @@ class HomePresenter(homeView: HomeContract.IView) : HomeContract.IPresenter {
                     wholeList?.addAll(homeBean.itemList)
 
                     mHomeView.setFirstData(wholeList!!)
+                    mHomeView.notifyRefreshCount(homeBean.refreshCount)
+
                 }, { t ->
                     t.printStackTrace()
                     mHomeView.onError()

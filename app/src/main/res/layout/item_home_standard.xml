@@ -6,7 +6,7 @@
     <ImageView
         android:id="@+id/iv_cover"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="220dp"
         android:scaleType="fitXY"
         android:src="@mipmap/home_page_header_cover" />
     

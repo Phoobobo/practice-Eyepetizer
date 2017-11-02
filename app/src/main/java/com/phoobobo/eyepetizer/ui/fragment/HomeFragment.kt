@@ -52,7 +52,7 @@ class HomeFragment : BaseFragment(tabId = tabsId[0]), HomeContract.IView {
         rv_home.setOnRefreshListener(object : PullRecyclerView.OnRefreshListener {
             override fun onRefresh() {
                 presenter.requestFirstData()
-                mDataRefreshListener = rv_home
+                mDataRefreshListener = rv_home // 下拉刷新后才准备好数据请求完毕的回掉
             }
         })
 
@@ -78,13 +78,16 @@ class HomeFragment : BaseFragment(tabId = tabsId[0]), HomeContract.IView {
     override fun setFirstData(itemList: ArrayList<Any>) {
         mHomeAdapter.bannerItemListCount = (itemList[0] as TopIssue).data.count
         mHomeAdapter.itemList = itemList
-        mDataRefreshListener?.onEndRefresh()
-        // TODO: 添加提示刷新数量的Toast
     }
 
     override fun setMoreData(itemList: ArrayList<ListItem>) {
         loadingMore = false
         mHomeAdapter.addData(itemList)
+    }
+
+    override fun notifyRefreshCount(count: Int) {
+        mDataRefreshListener?.onEndRefresh(count)
+        mDataRefreshListener = null
     }
 
     fun onLoadMore() {
@@ -101,7 +104,7 @@ class HomeFragment : BaseFragment(tabId = tabsId[0]), HomeContract.IView {
     }
 
     interface DataRefreshListener {
-        fun onEndRefresh()
+        fun onEndRefresh(count: Int)
     }
 
     private var mDataRefreshListener: DataRefreshListener? = null

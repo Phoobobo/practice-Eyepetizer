@@ -13,6 +13,7 @@ import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import android.widget.Toast
 import com.phoobobo.eyepetizer.R
 import com.phoobobo.eyepetizer.ui.fragment.HomeFragment
 import com.phoobobo.eyepetizer.ui.view.home.banner.HomeBanner
@@ -89,9 +90,8 @@ class PullRecyclerView : RecyclerView, HomeFragment.DataRefreshListener {
     }
 
     override fun onTouchEvent(e: MotionEvent?): Boolean {
-
+        if (canScrollVertically(-1)) return super.onTouchEvent(e)
         when (e?.action) {
-//            MotionEvent.ACTION_DOWN -> if (!canScrollVertically(-1)) mOriginY = e.y
             MotionEvent.ACTION_MOVE -> {
                 if (mPulling) {
                     val deltaY = e.y.minus(mOriginY)
@@ -197,7 +197,8 @@ class PullRecyclerView : RecyclerView, HomeFragment.DataRefreshListener {
         mOnRefreshListener = listener
     }
 
-    override fun onEndRefresh() {
+    override fun onEndRefresh(count: Int) {
         hideLoadingView()
+        Toast.makeText(context, "更新了$count 条内容", Toast.LENGTH_SHORT).show()
     }
 }
