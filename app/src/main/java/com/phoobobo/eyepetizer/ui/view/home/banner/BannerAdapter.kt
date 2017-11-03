@@ -23,6 +23,7 @@ class BannerAdapter : PagerAdapter() {
     }
 
     override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
+        viewList[position].releasePlayer()
         container?.removeView(viewList[position])
     }
 
@@ -37,6 +38,7 @@ class BannerAdapter : PagerAdapter() {
         }
         val view = viewList[position]
         container?.addView(view)
+        view.play()
         return view
     }
 
