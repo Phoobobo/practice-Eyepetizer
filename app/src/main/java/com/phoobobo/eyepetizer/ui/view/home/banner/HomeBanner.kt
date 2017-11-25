@@ -10,6 +10,7 @@ import android.widget.*
 import com.phoobobo.eyepetizer.R
 import com.phoobobo.eyepetizer.mvp.model.bean.Item
 import com.phoobobo.eyepetizer.mvp.model.bean.TopIssue
+import com.phoobobo.eyepetizer.ui.view.common.Indicator
 import com.phoobobo.eyepetizer.ui.view.common.JumpShowTextView
 import com.phoobobo.eyepetizer.utils.DisplayManager
 import kotlinx.android.synthetic.main.top_banner_home.view.*

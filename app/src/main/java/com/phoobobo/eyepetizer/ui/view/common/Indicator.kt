@@ -1,4 +1,4 @@
-package com.phoobobo.eyepetizer.ui.view.home.banner
+package com.phoobobo.eyepetizer.ui.view.common
 
 import android.content.Context
 import android.graphics.Canvas
@@ -13,6 +13,7 @@ class Indicator(context: Context) : View(context) {
 
     init {
         paint.isAntiAlias = true
+        paint.color = 0x88ffffff.toInt()
     }
 
     internal fun setState(selected: Boolean) {

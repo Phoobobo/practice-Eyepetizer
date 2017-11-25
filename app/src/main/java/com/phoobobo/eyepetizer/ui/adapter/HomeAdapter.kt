@@ -7,6 +7,8 @@ import com.phoobobo.eyepetizer.mvp.model.bean.HomeBean
 import com.phoobobo.eyepetizer.mvp.model.bean.HorizontalScrollCard
 import com.phoobobo.eyepetizer.mvp.model.bean.Item
 import com.phoobobo.eyepetizer.mvp.model.bean.ListItem
+import com.phoobobo.eyepetizer.toActivityWithSerializable
+import com.phoobobo.eyepetizer.ui.activity.DetailActivity
 import com.phoobobo.eyepetizer.ui.view.common.StandardVideoItem
 import com.phoobobo.eyepetizer.ui.view.home.InListBannerView
 import com.phoobobo.eyepetizer.ui.view.home.UnknownView
@@ -27,13 +29,15 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         }
     var bannerItemListCount = 0
 
-    private val TYPE_UNKNOWN = 0
-    private val TYPE_TOP_ISSUE = 1
-    private val TYPE_STANDARD = 2
-    private val TYPE_BANNER = 3 // 列表中的banner
-    private val TYPE_VIDEO_COLLECTION = 4
-    private val TYPE_SQUARE_COLLECTION = 5
-    private val TYPE_HORIZONTAL_SCROLL_CARD = 6 // 列表内自动播放的banner
+    companion object {
+        private val TYPE_UNKNOWN = 0
+        private val TYPE_TOP_ISSUE = 1
+        private val TYPE_STANDARD = 2
+        private val TYPE_BANNER = 3 // 列表中的banner
+        private val TYPE_VIDEO_COLLECTION = 4
+        private val TYPE_SQUARE_COLLECTION = 5
+        private val TYPE_HORIZONTAL_SCROLL_CARD = 6 // 列表内自动播放的banner
+    }
 
     fun addData(itemList: ArrayList<ListItem>) {
         this.itemList.addAll(itemList)
@@ -63,8 +67,13 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         when (itemViewType) {
             TYPE_TOP_ISSUE -> (holder?.itemView as HomeBanner)
                     .setData(itemList[position])
-            TYPE_STANDARD -> (holder?.itemView as StandardVideoItem)
-                    .setData(itemList[position])
+            TYPE_STANDARD -> (holder?.itemView as StandardVideoItem).let {
+                val item = (itemList[position] as ListItem).data.content
+                it.setData(itemList[position])
+                it.setOnClickListener { v ->
+                    v.context.toActivityWithSerializable<DetailActivity>(item)
+                }
+            }
             TYPE_BANNER -> (holder?.itemView as InListBannerView)
                     .setData(itemList[position])
             TYPE_VIDEO_COLLECTION -> (holder?.itemView as CollectionView)

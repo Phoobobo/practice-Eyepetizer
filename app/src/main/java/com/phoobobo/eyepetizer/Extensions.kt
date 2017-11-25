@@ -1,9 +1,13 @@
 package com.phoobobo.eyepetizer
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.view.View
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.io.Serializable
 import java.util.*
 
 /**
@@ -14,6 +18,12 @@ fun  <T> Observable<T>.io_main(): Observable<T> {
     return subscribeOn(Schedulers.io())
             .unsubscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+}
+
+inline fun <reified T : Activity> Context.toActivityWithSerializable(data: Serializable) {
+    val intent = Intent(this, T::class.java)
+    intent.putExtra("data", data)
+    startActivity(intent)
 }
 
 fun View.durationFormat(duration: Long?): String {
