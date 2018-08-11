@@ -26,7 +26,7 @@ class ScrollBannerAdapter : PagerAdapter() {
         }
     private var viewList: ArrayList<InListBannerView> = ArrayList()
 
-    override fun isViewFromObject(view: View?, `object`: Any?): Boolean {
+    override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
     }
 
@@ -34,13 +34,13 @@ class ScrollBannerAdapter : PagerAdapter() {
         return if (itemList == null) 0 else fakeSize
     }
 
-    override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
 //        val truePosition = position % itemList!!.size
 //        container?.removeView(viewList[truePosition])
         container?.removeView(`object` as View)
     }
 
-    override fun instantiateItem(container: ViewGroup?, position: Int): Any {
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val truePosition = position % itemList!!.size
 //        if (viewList.size <= truePosition) {
 //            val inListBannerView = InListBannerView(container?.context)

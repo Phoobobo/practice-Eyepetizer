@@ -16,11 +16,11 @@ class SquareCollectionAdapter : RecyclerView.Adapter<SquareCollectionAdapter.Vie
             notifyDataSetChanged()
         }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         (holder?.itemView as SquareCollectionItem).setData(itemList[position])
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(SquareCollectionItem(parent?.context!!))
     }
 

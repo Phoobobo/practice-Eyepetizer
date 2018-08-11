@@ -18,11 +18,11 @@ class BannerAdapter : PagerAdapter() {
 
     private var viewList: ArrayList<HomeBannerItem> = ArrayList()
 
-    override fun isViewFromObject(view: View?, `object`: Any?): Boolean {
+    override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
     }
 
-    override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         viewList[position].releasePlayer()
         container?.removeView(viewList[position])
     }
@@ -31,7 +31,7 @@ class BannerAdapter : PagerAdapter() {
         return if (data == null) 0 else data!!.size
     }
 
-    override fun instantiateItem(container: ViewGroup?, position: Int): Any {
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
         if (viewList.size <= position) {
             val homeBannerItem = HomeBannerItem(container?.context, data!![position])
             viewList.add(homeBannerItem)

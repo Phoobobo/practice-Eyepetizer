@@ -62,7 +62,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val itemViewType = getItemViewType(position)
         when (itemViewType) {
             TYPE_TOP_ISSUE -> (holder?.itemView as HomeBanner)
@@ -87,7 +87,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return when (viewType) {
             TYPE_TOP_ISSUE -> ViewHolder(HomeBanner(parent!!.context))
             TYPE_BANNER -> ViewHolder(InListBannerView(parent!!.context))

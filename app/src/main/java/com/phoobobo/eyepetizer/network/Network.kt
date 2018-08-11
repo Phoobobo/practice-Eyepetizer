@@ -14,8 +14,8 @@ import java.util.concurrent.TimeUnit
  */
 object Network {
     private val retrofit: Retrofit
-    private val base_url = "http://baobab.kaiyanapp.com/api/"
-    private val DEFAULT_TIMEOUT = 5L
+    private const val base_url = "http://baobab.kaiyanapp.com/api/"
+    private const val DEFAULT_TIMEOUT = 5L
     private val okHttpClient: OkHttpClient
 
     init {

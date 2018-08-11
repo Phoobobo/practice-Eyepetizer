@@ -16,11 +16,11 @@ class CollectionAdapter : RecyclerView.Adapter<CollectionAdapter.ViewHolder>() {
             notifyDataSetChanged()
         }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         (holder?.itemView as CollectionItem).setData(itemList[position])
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(CollectionItem(parent?.context!!))
     }
 
