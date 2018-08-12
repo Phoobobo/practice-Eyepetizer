@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.phoobobo.eyepetizer.R
+import com.phoobobo.eyepetizer.v2.ui.adapters.HomeFragmentAdapter
+import kotlinx.android.synthetic.main.fragment_home2.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,6 +32,8 @@ class HomeFragment : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
+    private lateinit var mPagerAdapter: HomeFragmentAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -47,6 +51,13 @@ class HomeFragment : Fragment() {
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mPagerAdapter = HomeFragmentAdapter(activity!!.supportFragmentManager)
+        pager.adapter = mPagerAdapter
+        pager_tab_strip.textSpacing = 10
     }
 
     override fun onAttach(context: Context) {
